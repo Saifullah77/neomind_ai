@@ -1,14 +1,16 @@
 from task_manager import generate_tasks
 from memory import store_memory
 from self_improve import self_review
-from tools.web_reader import search_web
 
-def main():
-    print("🧠 NeoMind AI Starting...")
-    tasks = generate_tasks("Learn about Langchain and make a simple agent")
+def process_input(user_input):
+    tasks = generate_tasks(user_input)
+    full_result = ""
+
     for task in tasks:
-        print(f"🛠️ Task: {task}")
-        result_list = search_web(task)
-        result = "\n".join(result_list)
+        result = f"Simulated result of '{task}'"
+        feedback = self_review(task, result)
         store_memory(task, result)
-        self_review(task, result)
+
+        full_result += f"🛠️ {task}\n📌 {result}\n💬 {feedback}\n\n"
+
+    return full_result

@@ -1,4 +1,8 @@
 def self_review(task, result):
-    print(f"🤔 Reviewing: {task}")
     if "error" in result.lower():
-        print("⚠️ Found issue, retrying or changing plan...")
+        feedback = f"⚠️ Hmm... The result for '{task}' seems to have an issue."
+    else:
+        feedback = f"✅ Good job! The result for '{task}' looks fine."
+
+    print(f"[REVIEW] {feedback}")
+    return feedback
